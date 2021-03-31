@@ -1,9 +1,10 @@
-from . import image_schema, rpm_schema
+from . import image_schema, rpm_schema, streams_schema
 from .. import support
 
 
 def validate(file, data):
     return {
+        'streams': streams_schema.validate,
         'image': image_schema.validate,
         'rpm': rpm_schema.validate,
     }.get(support.get_artifact_type(file), err)(file, data)
